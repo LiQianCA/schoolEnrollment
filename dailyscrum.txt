@@ -1,0 +1,171 @@
+<<2023-11-02 Li >>
+1. What I have done since last Scrum?
+   - prepare proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify proposal after discussing with Greg
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-02 Chang >>
+1. What I have done since last Scrum?
+   - prepare proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify proposal after discussing with Greg
+   - setup DB
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-02 Qianfeng >>
+1. What I have done since last Scrum?
+   - prepare proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify proposal after discussing with Greg
+   - setup DB
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-03 Li >>
+1. What I have done since last Scrum?
+   - submitted proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - watching video and setup DB
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-03 Chang >>
+1. What I have done since last Scrum?
+   - submitted proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - watching video and setup DB
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-03 Qianfeng >>
+1. What I have done since last Scrum?
+   - submitted proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep setup DB
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-04 Li >>
+1. What I have done since last Scrum?
+   - Azure Database setup
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - Employee pannel
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-04 Chang >>
+1. What I have done since last Scrum?
+   - Azure Database test
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - user interface design
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-04 Qianfeng >>
+1. What I have done since last Scrum?
+   - Azure database setup	
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - write code for models
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-05 Li >>
+1. What I have done since last Scrum?
+   - Employee pannel
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - write code for Job.cs
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-05 Chang >>
+1. What I have done since last Scrum?
+   - part of user interface
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue to user interface design
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-05 Qianfeng >>
+1. What I have done since last Scrum?
+   - write code for department models	
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - write code for department service
+3. Where do I need assistance? What do I need to figure out?
+
+
+<<2023-11-07 Li >>
+1. What I have done since last Scrum?
+   -Employee CRUD
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - jobtitle
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-07 Chang >>
+1. What I have done since last Scrum?
+   - user interface design
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep doing on UI
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-07 Qianfeng >>
+1. What I have done since last Scrum?
+   - candidates window	
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - candidates window
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-08 Li >>
+1. What I have done since last Scrum?
+   -Jobsection
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep solving jobs
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-08 Chang >>
+1. What I have done since last Scrum?
+   - user interface design
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep doing on UI
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-8 Qianfeng >>
+1. What I have done since last Scrum?
+   - candidates window	
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - candidates window
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-09 Li >>
+1. What I have done since last Scrum?
+   -Job titile filter      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - UI improvement
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-09 Chang >>
+1. What I have done since last Scrum?
+   - add icon and pics in UI
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep doing on UI
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-9 Qianfeng >>
+1. What I have done since last Scrum?
+   - candidates window xaml
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - candidates window code update
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-10 Li >>
+1. What I have done since last Scrum?
+   -UI improvement     
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep UI improvement
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-10 Chang >>
+1. What I have done since last Scrum?
+   - add icon and pics in UI
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - prepare PPT
+3. Where do I need assistance? What do I need to figure out?   
+
+<<2023-11-10 Qianfeng >>
+1. What I have done since last Scrum?
+   - candidates window 
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - prepare PPT
+3. Where do I need assistance? What do I need to figure out?
+
