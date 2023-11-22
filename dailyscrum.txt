@@ -39,3 +39,24 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
    - modify proposal based on the feedback
 3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-21 Li >>
+1. What I have done since last Scrum?
+   - modify proposal based on the feedback
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - finish proposal
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-21 Chang >>
+1. What I have done since last Scrum?
+   - modify proposal based on the feedback
+2. What I plan to do from this scrum to next? (next 24 hours)
+   -finish proposal
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-21 Qianfeng >>
+1. What I have done since last Scrum?
+   - modify proposal based on the feedback
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - finish proposal
+3. Where do I need assistance? What do I need to figure out?
