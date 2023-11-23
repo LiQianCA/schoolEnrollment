@@ -82,3 +82,24 @@
    - UI layout design
 3. Where do I need assistance? What do I need to figure out?
 
+<<2023-11-23 Li >>
+1. What I have done since last Scrum?
+   - start index
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep working on index
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-23 Chang >>
+1. What I have done since last Scrum?
+   - find pictures
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - start login page
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-23 Qianfeng >>
+1. What I have done since last Scrum?
+   - UI layout design
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - start register page
+3. Where do I need assistance? What do I need to figure out?
+
