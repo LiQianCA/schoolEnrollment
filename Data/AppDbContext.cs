@@ -10,6 +10,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
+
     public DbSet<Actor> Actors { get; set; }
     public DbSet<Movie> Movies { get; set; }
     public DbSet<ActorMovie> ActorsMovies { get; set; }
