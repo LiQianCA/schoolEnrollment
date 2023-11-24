@@ -1,0 +1,67 @@
+﻿@{
+   ViewData["Title"] = "Courses";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Courses</title>
+    @section scripts 
+    {
+    <script>
+        function Details(CourseName)
+        {
+            $.get('@Url.Action("GetStudentsbyCourseview", "Home")', { CourseName: CourseName },
+                function (data) { $('.model-body').html(data); });
+            $("#myModal").modal("show");
+        }
+    </script>
+    }
+</head>
+<body>
+    <h1>Courses Available</h1>
+    <br />
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Course Id</th>
+                <th>Course Number</th>
+                <th>Course Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.Courses)
+            {
+                <tr>
+                    <th scope="row">@item.CourseId</th>
+                    <td>@item.CourseNumber</td>
+                    <td><a id="CourseName" href="javascript:Details('@item.CourseName')">@item.CourseName</a></td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Student Details</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+</body>
+</html>
