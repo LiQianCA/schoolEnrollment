@@ -1,4 +1,6 @@
-﻿@using LastFilm_Web_App.Data.ViewModels;
+
+
+@using LastFilm_Web_App.Data.ViewModels;
 @model LoginVM;
 
 @{
@@ -28,11 +30,7 @@
                         <span asp-validation-for="EmailAddress" class="text-danger"></span>
                     </div>
                     
-                    <div class="mb-3">
-                        <label asp-for="Password" class="col-form-label"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
+                    
 
                     <div class="mb-3">
                         <input class="btn btn-outline-success float-end" type="submit" value="Log in" />
