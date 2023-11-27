@@ -144,4 +144,24 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
    - user select courses
 3. Where do I need assistance? What do I need to figure out?
-
+
+<<2023-11-25 Li >>
+1. What I have done since last Scrum?
+   - work on index
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-25 Chang >>
+1. What I have done since last Scrum?
+   - login page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-25 Qianfeng >>
+1. What I have done since last Scrum?
+   - register page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - user select courses
+3. Where do I need assistance? What do I need to figure out?
