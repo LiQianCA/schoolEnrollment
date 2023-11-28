@@ -187,3 +187,25 @@
    - continue user select courses
 3. Where do I need assistance? What do I need to figure out?
 
+
+<<2023-11-28 Li >>
+1. What I have done since last Scrum?
+   - part of admin manage courses      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue admin manage courses, improve UI
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-28 Chang >>
+1. What I have done since last Scrum?
+   - part of admin manage courses
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue admin manage courses, admin can print 
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-28 Qianfeng >>
+1. What I have done since last Scrum?
+   - part of user select courses      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue user select courses, admin can export to file
+3. Where do I need assistance? What do I need to figure out?
+
