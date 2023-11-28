@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using schoolEnrollment.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineCourse.Models;
 using System.Diagnostics;
 
-namespace schoolEnrollment.Controllers
+namespace OnlineCourse.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,7 +12,7 @@ namespace schoolEnrollment.Controllers
         {
             _logger = logger;
         }
-    
+
         public IActionResult Index()
         {
             return View();

@@ -1,0 +1,189 @@
+<<2023-11-19 Li >>
+1. What I have done since last Scrum?
+   - prepare proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify and finish proposal, github, trello
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-19 Chang >>
+1. What I have done since last Scrum?
+   - prepare proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   -modify and finish proposal, github, trello
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-19 Qianfeng >>
+1. What I have done since last Scrum?
+   - prepare proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify and finish proposal, github, trello
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-20 Li >>
+1. What I have done since last Scrum?
+   - finish proposal, github, trello
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify proposal based on the feedback
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-20 Chang >>
+1. What I have done since last Scrum?
+   - finish proposal, github, trello
+2. What I plan to do from this scrum to next? (next 24 hours)
+   -modify proposal based on the feedback
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-20 Qianfeng >>
+1. What I have done since last Scrum?
+   - finish proposal, github, trello
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify proposal based on the feedback
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-21 Li >>
+1. What I have done since last Scrum?
+   - modify proposal based on the feedback
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - finish proposal
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-21 Chang >>
+1. What I have done since last Scrum?
+   - modify proposal based on the feedback
+2. What I plan to do from this scrum to next? (next 24 hours)
+   -finish proposal
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-21 Qianfeng >>
+1. What I have done since last Scrum?
+   - modify proposal based on the feedback
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - finish proposal
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-22 Li >>
+1. What I have done since last Scrum?
+   - finish proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - start index
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-22 Chang >>
+1. What I have done since last Scrum?
+   - finish proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   -find pictures 
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-22 Qianfeng >>
+1. What I have done since last Scrum?
+   - finish proposal
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - UI layout design
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-23 Li >>
+1. What I have done since last Scrum?
+   - start index
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep working on index
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-23 Chang >>
+1. What I have done since last Scrum?
+   - find pictures
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - start login page
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-23 Qianfeng >>
+1. What I have done since last Scrum?
+   - UI layout design
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - start register page
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-24 Li >>
+1. What I have done since last Scrum?
+   - work on index
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - keep working on index
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-24 Chang >>
+1. What I have done since last Scrum?
+   - login page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify login page
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-24 Qianfeng >>
+1. What I have done since last Scrum?
+   - register page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - modify register page
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-25 Li >>
+1. What I have done since last Scrum?
+   - work on index
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-25 Chang >>
+1. What I have done since last Scrum?
+   - login page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-25 Qianfeng >>
+1. What I have done since last Scrum?
+   - register page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - user select courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-26 Li >>
+1. What I have done since last Scrum?
+   - work on index, test login page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-26 Chang >>
+1. What I have done since last Scrum?
+   - login page, test index page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-26 Qianfeng >>
+1. What I have done since last Scrum?
+   - register page, test login page
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - user select courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-27 Li >>
+1. What I have done since last Scrum?
+   - part of admin manage courses      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-27 Chang >>
+1. What I have done since last Scrum?
+   - part of admin manage courses
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue admin manage courses
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-27 Qianfeng >>
+1. What I have done since last Scrum?
+   - part of user select courses      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - continue user select courses
+3. Where do I need assistance? What do I need to figure out?
+
