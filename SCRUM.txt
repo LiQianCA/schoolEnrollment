@@ -209,3 +209,23 @@
    - continue user select courses, admin can export to file
 3. Where do I need assistance? What do I need to figure out?
 
+<<2023-11-29 Li >>
+1. What I have done since last Scrum?
+   - finish admin manage courses      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - user payment part
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-29 Chang >>
+1. What I have done since last Scrum?
+   - finish admin manage courses
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - user payment part 
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-11-29 Qianfeng >>
+1. What I have done since last Scrum?
+   - finish user select courses      
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - admin can export to file
+3. Where do I need assistance? What do I need to figure out?
