@@ -1,0 +1,173 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "StudentList";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>StudentList</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="layui-container">
+        <div style="margin-top:10px;"></div>
+        <div class="layui-row">
+            <div class="layui-col-xs2">
+                <img style="height:50px" src="/lib/images/logo.png">
+            </div>
+            <div class="layui-col-xs6">
+                <div class="layui-form-item">
+                    <div class="layui-input-group">
+                        <div class="layui-input-prefix">
+                            Search
+                        </div>
+                        <input style="width:500px;" type="text" placeholder="input user name to search" class="layui-input" id="user_nameTb">
+                        <div class="layui-input-split layui-input-suffix" style="cursor: pointer;">
+                            <i class="layui-icon layui-icon-search" onclick="OnSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs4">
+               
+                <a class="layui-btn layui-btn-primary layui-btn-radius" href="/MainView/AdminIndex">Back to Admin Panel</a>
+                <a class="layui-btn layui-btn-primary layui-btn-radius layui-bg-red" href="Logout">Logout</a>
+            </div>
+        </div>
+
+        @{
+            if (@ViewBag.msg != null)
+            {
+                <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+                <script src="/lib/layer/layer.js" charset="utf-8"></script>
+                <script type="text/javascript">
+                    var str = '@(ViewBag.msg)';
+                    layer.msg(str);
+                </script>
+            }
+        }
+       
+        <table class="layui-hide" id="apply" lay-filter="apply" lay-data="{height: '400', cellMinWidth: 80, page: true, limit:30}"></table>
+        <script type="text/html" id="toolbarDemo">
+            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Reflash</button>
+
+        </script>
+        <script type="text/html" id="barDemo">
+            <div class="layui-clear-space">
+              <a class="layui-btn layui-btn-xs" lay-event="delete">Delete</a>
+            </div>
+        </script>
+    </div>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script>
+
+        layui.use(function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , table = layui.table;
+
+            var tableIns = table.render({
+                elem: '#apply'
+                , toolbar: '#toolbarDemo'
+                , height: 'full-40'
+                , size: 'sm'
+                , url: 'GetStudentTableData?time=' + new Date().getTime()
+                , where: { course_name: $("#course_nameTb").val() }
+                , cols: [[
+                    { type: 'radio', title: '😊' }
+                    
+                    , { field: 'User_Id', width: '10%', title: 'id', hide: true, align: 'center' }
+                    , { field: 'User_Account', width: '20%', title: 'Account', align: 'center' }
+                    , { field: 'Name', width: '25%', title: 'Name', align: 'center' }
+                    , { field: 'Phone', width: '25%', title: 'Phone', align: 'center' }
+                    , { field: 'Email', width: '20%', title: 'Email', align: 'center' }
+                    
+                    , { fixed: 'right', title: 'Operate', minWidth: 125, toolbar: '#barDemo' }
+                ]]
+                , data: []
+                , page: true
+                , limit: 10
+                , limits: [10, 30, 40, 50, 60, 70, 80, 90]
+                , parseData: function (res) {
+                    var pagecurr = 1;
+                    if (this.page.curr != null)
+                        pagecurr = this.page.curr;
+                    var result = res.slice(this.limit * (pagecurr - 1), this.limit * pagecurr);
+
+                    return {
+                        "code": "0",
+                        "msg": "",
+                        "count": res.length,
+                        "data": result
+                    };
+                }
+                , done: function () {
+
+                }
+
+
+            });
+
+            table.on('toolbar(apply)', function (obj) {
+                switch (obj.event) {
+                    case 'reflash':
+                        tableIns.reload('apply', { where: { time: new Date() } });
+                        layer.msg("Reflash Success!");
+                        break;
+                };
+            });
+            // 触发单元格工具事件
+            table.on('tool(apply)', function (obj) { // 双击 toolDouble
+                var data = obj.data; // 获得当前行数据
+                if (obj.event === 'delete') {
+                    DeleteUser(data.User_Id);
+                }
+
+            });
+
+            window.OnSearch = function () {
+                table.reloadData('apply', { where: { user_name: $("#user_nameTb").val() } });
+                layer.msg("Search Success!");
+            }
+
+            window.DeleteUser = function (id) {
+                layer.confirm("Are you sure to delete this data?", {
+                    btn: ['Sure', 'Cancel']
+                }, function () {
+                    $.ajax({
+                        type: 'post',
+                        url: 'DeleteUser?time=' + new Date().getTime(),
+                        data: { id: id },
+                        success: (data) => {
+                            var resJson = JSON.parse(data);
+                            if (resJson.state != 1) {
+                                layer.alert(resJson.msg, { title: "alert" });
+                            }
+                            else {
+                                table.reloadData('apply', { where: { user_name: $("#user_nameTb").val() } });
+                                layer.msg(resJson.msg);
+                            }
+
+                        }
+                    });
+
+                });
+            };
+        });
+
+
+    </script>
+</body>
+</html>

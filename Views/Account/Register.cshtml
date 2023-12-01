@@ -1,0 +1,275 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Register";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Register</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #96C120;
+        }
+
+            body:after {
+                content: '';
+                background-repeat: no-repeat;
+                background-size: cover;
+                -webkit-filter: blur(3px);
+                -moz-filter: blur(3px);
+                -o-filter: blur(3px);
+                -ms-filter: blur(3px);
+                filter: blur(3px);
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: -1;
+            }
+
+        .layui-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .admin-login-background {
+            width: 360px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            margin-left: -180px;
+            margin-top: -100px;
+        }
+
+        .logo-title {
+            text-align: center;
+            letter-spacing: 2px;
+            padding: 14px 0;
+        }
+
+            .logo-title h1 {
+                color: #1E9FFF;
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+        .login-form {
+            background-color: #fff;
+            border: 1px solid #fff;
+            border-radius: 3px;
+            padding: 14px 20px;
+            box-shadow: 0 0 8px #eeeeee;
+        }
+
+            .login-form .layui-form-item {
+                position: relative;
+            }
+
+                .login-form .layui-form-item label {
+                    position: absolute;
+                    left: 1px;
+                    top: 1px;
+                    width: 38px;
+                    line-height: 36px;
+                    text-align: center;
+                    color: #d2d2d2;
+                }
+
+                .login-form .layui-form-item input {
+                    padding-left: 36px;
+                }
+
+        .captcha {
+            width: 60%;
+            display: inline-block;
+        }
+
+        .captcha-img {
+            display: inline-block;
+            width: 34%;
+            float: right;
+        }
+
+            .captcha-img img {
+                height: 34px;
+                border: 1px solid #e6e6e6;
+                height: 36px;
+                width: 100%;
+            }
+    </style>
+</head>
+<body>
+    <div class="layui-container">
+        <div class="admin-login-background">
+            @using schoolEnrollment.Models:
+            @model Users
+            <form class="layui-form login-form" lay-filter="registerform">
+
+                <div class="layui-form-item logo-title">
+                    <h1>User Register</h1>
+                </div>
+                <div class="layui-form-item">
+                    <label style="display:inline-block;color:black;">Account:</label>
+                    <input style="display: inline-block; width: 75%; float:right;" type="text" name="user_account" id="user_account" autocomplete="off" lay-verify="required" placeholder="please input account" class="layui-input" value="@(Model.User_Account)">
+                </div>
+                <div class="layui-form-item">
+                    <label style="display: inline-block;color: black;">Name:</label>
+                    <input style="display: inline-block; width: 75%; float:right;" type="text" name="name" id="name" placeholder="please input name" lay-verify="required" autocomplete="off" class="layui-input" value="@(Model.Name)">
+
+                </div>
+                <div class="layui-form-item">
+                    <label style="display: inline-block;color: black;">Password:</label>
+                    <input style="display: inline-block; width: 75%; float:right;" type="password" name="user_password" placeholder="please input password" lay-verify="required|pass" autocomplete="off" class="layui-input" value="@(Model.User_Password)">
+
+                </div>
+                <div class="layui-form-item">
+                    <label style="display:inline-block;color:black;">Confirm:</label>
+                    <input style="display: inline-block; width: 75%; float:right;" type="password" id="newpassword" name="newpassword" placeholder="please input password" lay-verify="required|pass|samepass" autocomplete="off" class="layui-input" value="">
+                </div>
+                <div class="layui-form-item">
+                    <label style="display:inline-block;color:black;">Phone:</label>
+                    <input style="display: inline-block; width: 75%; float:right;" type="text" name="phone" id="phone" autocomplete="off" lay-verify="required|phone10" placeholder="please input phone" class="layui-input" value="@(Model.Phone)">
+                </div>
+
+                <div class="layui-form-item">
+                    <label style="display:inline-block;color:black;">Email:</label>
+                    <input style="display: inline-block; width: 75%; float:right;" type="text" name="email" id="email" autocomplete="off" lay-verify="required|email" placeholder="please input email" class="layui-input" value="@(Model.Email)">
+                </div>
+                <div class="layui-btn-container">
+                    <a style="width: 46%" class="layui-btn layui-btn layui-btn-normal" href="javascript:void(0)" onclick="ToRegister()">Register</a>
+                    <a style="width: 46%" class="layui-btn layui-btn layui-btn-warm"  onclick="javascrtpt:window.location.href='Index'">Back</a>
+                </div>
+
+                <div style="text-align: center"> 2023 &copy; JA LANGUAGE SCHOOL</div>
+            </form>
+            @{
+                if (@ViewBag.msg != null)
+                {
+                    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+                    <script src="/lib/layer/layer.js" charset="utf-8"></script>
+                    <script type="text/javascript">
+                        var str = '@(ViewBag.msg)';
+                        layer.alert(str);
+
+                    </script>
+                }
+            }
+        </div>
+    </div>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/lib/jquery/jquery.particleground.min.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+
+            //自定义验证规则
+            form.verify({
+                phone10: function (value, elem) {
+                    const regex = /^\d{10}$/;
+
+                    if (!regex.test(value)) {
+                        return 'The phone number must be 10 numbers';
+                    }
+                    
+                },
+                pass: function (value, elem){
+                    const regex = /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/;
+
+                    if (!regex.test(value)) {
+                        return 'The password must be 6 to 20 digits and must include letters and numbers';
+                    }
+                    
+                },
+                
+                samepass: function (value) {
+                    if (document.getElementById('newpassword').value != document.getElementById('password').value) {
+                        return 'Entered passwords differ!';
+                    }
+                }
+
+                , content: function (value) {
+                    layedit.sync(editIndex);
+                }
+            });
+
+            window.ToRegister = function () {
+                var isAccountValid = form.validate('#user_account');
+                if (!isAccountValid) {
+                    layer.msg("The Account can not be empty!");
+                    return false;
+                }
+                var isNameValid = form.validate('#name');
+                if (!isNameValid) {
+                    layer.msg("The Name can not be empty!");
+                    return false;
+                }
+                var isPasswordValid = form.validate('#user_password');
+                if (!isPasswordValid) {
+                    layer.msg("The password must be 6 to 20 digits and must include letters and numbers!");
+                    return false;
+                }
+                var isNewPasswordValid = form.validate('#newpassword');
+                if (!isNewPasswordValid) {
+                    layer.msg("The password must be 6 to 20 digits and must include letters and numbers!");
+                    return false;
+                }
+                if (document.getElementById('newpassword').value != document.getElementById('password').value) {
+                    return 'Entered passwords differ!';
+                }
+
+                var isPhoneValid = form.validate('#phone');
+                if (!isPhoneValid) {
+                    layer.msg("The phone number must be 10 numbers");
+                    return false;
+                }
+                var isEmailValid = form.validate('#email');
+                if (!isEmailValid) {
+                    layer.msg("please input the right email format");
+                    return false;
+                }
+                var _formdata = form.val('registerform');
+                $.ajax({
+                    type: 'post',
+                    url: 'DoRegister?time=' + new Date().getTime(),
+                    data: { formdata: JSON.stringify(_formdata) },
+                    success: (data) => {
+                        var resJson = JSON.parse(data);
+                        if (resJson.state != 1) {
+                            layer.alert(resJson.msg, { title: "alert" });
+                        }
+                        else {
+                            layer.msg(resJson.msg);
+                            window.location.href = "/Account/Index";
+                        }
+
+                    }
+                });
+            }
+            
+            $(document).ready(function () {
+                $('.layui-container').particleground({
+                    dotColor: '#A3CD39',
+                    lineColor: '#A3CD39'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
