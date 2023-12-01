@@ -251,3 +251,23 @@
    - continue admin can export to file
 3. Where do I need assistance? What do I need to figure out?
 
+<<2023-12-01 Li >>
+1. What I have done since last Scrum?
+   - user payment         
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - function test
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-12-01 Chang >>
+1. What I have done since last Scrum?
+   - user payment     
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - test payment function
+3. Where do I need assistance? What do I need to figure out?
+
+<<2023-12-01 Qianfeng >>
+1. What I have done since last Scrum?
+   - admin can export file     
+2. What I plan to do from this scrum to next? (next 24 hours)
+   - test export to file
+3. Where do I need assistance? What do I need to figure out?
