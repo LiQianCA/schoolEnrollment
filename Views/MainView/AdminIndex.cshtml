@@ -1,0 +1,253 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <style>
+        .layui-elem-quote {
+            margin-bottom: 10px;
+            padding: 8px;
+            line-height: 1.8;
+            border-left: 5px solid #16b777;
+            border-radius: 0 2px 2px 0;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-container">
+        <div style="margin-top:5px;"></div>
+        <blockquote class="layui-elem-quote">
+            WelCome,Admin
+        </blockquote>
+        <div class="layui-row">
+            <div class="layui-col-xs2">
+                <img style="height:50px" src="/lib/images/logo.png">
+            </div>
+            <div class="layui-col-xs6">
+                <div class="layui-form-item">
+                    <div class="layui-input-group">
+                        <div class="layui-input-prefix">
+                            Search
+                        </div>
+                        <input style="width:500px;" type="text" placeholder="input course to search" class="layui-input" id="course_nameTb">
+                        <div class="layui-input-split layui-input-suffix" style="cursor: pointer;">
+                            <i class="layui-icon layui-icon-search" onclick="OnSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs4">
+
+                <a class="layui-btn layui-bg-blue layui-btn-radius" href="/Course/CourseManament">Course Management</a>
+                <a class="layui-btn layui-btn-radius">Chart</a>
+                <a class="layui-btn layui-btn-primary layui-btn-radius layui-bg-red" href="/MainView/Logout">Logout</a>
+            </div>
+        </div>
+        <table class="layui-hide" id="apply" lay-filter="apply" lay-data="{height: '400', cellMinWidth: 80, page: true, limit:30}"></table>
+        <script type="text/html" id="toolbarDemo">
+            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Reflash</button>
+
+        </script>
+        <script type="text/html" id="barDemo_1">
+            <div class="layui-clear-space">
+              <a class="layui-btn layui-btn-xs" lay-event="approve">Approve</a>
+              <a class="layui-btn layui-btn-xs" lay-event="reject">Reject</a>
+              <a class="layui-btn layui-btn-xs" lay-event="refund">Refund</a>
+            </div>
+        </script>
+        <script type="text/html" id="barDemo_2">
+            <div class="layui-clear-space">
+              <a class="layui-btn layui-btn-xs" lay-event="delete">Delete</a>
+            </div>
+        </script>
+        @{
+            if (@ViewBag.msg != null)
+            {
+                            <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+                            <script src="/lib/layer/layer.js" charset="utf-8"></script>
+                            <script type="text/javascript">
+                                var str = '@(ViewBag.msg)';
+                                layer.msg(str);
+                            </script>
+            }
+        }
+    </div>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script>
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer
+                , table = layui.table;
+
+            var tableIns = table.render({
+                elem: '#apply'
+                , toolbar: '#toolbarDemo'
+                , height: 'full-40'
+                , size: 'sm'
+                , url: 'GetEnrollmentTableData?time=' + new Date().getTime()
+                , where: { course_name: $("#course_nameTb").val() }
+                , cols: [[
+                    { type: 'radio', title: '😊' }
+                    , { field: 'Enrollment_Id', width: '10%', title: 'Enrollment Id', hide: true, align: 'center' }
+                    , { field: 'Course_Name', width: '10%', title: 'Course Name', align: 'center' }
+                    , { field: 'Enrollment_Time', width: '15%', title: 'Enrollment Time', align: 'center' }
+                    , { field: 'Enrollment_Status', width: '15%', title: 'Enrollment Status', align: 'center' }
+                    , { title: 'Approve/Reject/Refund', width: '16%', toolbar: '#barDemo_1' }
+                    , { field: 'Payment_Amount', width: '10%', title: 'Payment Amount', align: 'center' }
+                    , { field: 'Payment_Time', width: '10%', title: 'Payment Time', align: 'center' }
+                    , { field: 'Payment_Status', width: '15%', title: 'Payment Status', align: 'center' }
+                    , { fixed: 'right', title: 'Operate', minWidth: 125, toolbar: '#barDemo_2' }
+                ]]
+                , data: []
+                , page: true
+                , limit: 10
+                , limits: [10, 30, 40, 50, 60, 70, 80, 90]
+                , parseData: function (res) {
+                    var pagecurr = 1;
+                    if (this.page.curr != null)
+                        pagecurr = this.page.curr;
+                    var result = res.slice(this.limit * (pagecurr - 1), this.limit * pagecurr);
+
+                    return {
+                        "code": "0",
+                        "msg": "",
+                        "count": res.length,
+                        "data": result
+                    };
+                }
+                , done: function () {
+
+                }
+
+
+            });
+            window.OnSearch = function () {
+                table.reloadData('apply', { where: { course_name: $("#course_nameTb").val() } });
+                layer.msg("Search Success!");
+            }
+            table.on('toolbar(apply)', function (obj) {
+                switch (obj.event) {
+                    case 'reflash':
+                        table.reloadData('apply', { where: { course_name: $("#course_nameTb").val() } });
+                        layer.msg("Reflash Success!");
+                        break;
+                };
+            });
+            // 触发单元格工具事件
+            table.on('tool(apply)', function (obj) { // 双击 toolDouble
+                var data = obj.data; // 获得当前行数据
+                // console.log(obj)
+                if (obj.event === 'approve') {
+                    ApproveEnrollment(data.Enrollment_Id);
+                } else if (obj.event === 'reject') {
+                    RejectEnrollment(data.Enrollment_Id);
+                }
+                else if (obj.event === 'refund') {
+                    RefundEnrollment(data.Enrollment_Id);
+                }
+                else if (obj.event === 'delete') {
+                    DeleteEnrollment(data.Enrollment_Id);
+                }
+            });
+
+            window.ApproveEnrollment = function (enrollmentid) {
+                var loadIndex = layer.msg('Approving', {
+                    icon: 16,
+                    shade: 0.01
+                });
+
+                $.ajax({
+                    type: 'post',
+                    url: 'ApproveCourse?time=' + new Date().getTime(),
+                    data: { enrollment_id: enrollmentid },
+                    success: (data) => {
+                        layer.close(loadIndex);
+                        var resJson = JSON.parse(data);
+                        if (resJson.state != 1) {
+                            layer.alert(resJson.msg, { title: "alert" });
+                        }
+                        else {
+                            tableIns.reload('apply', { where: { time: new Date(), course_name: $("#course_nameTb").val() } });
+                            layer.msg(resJson.msg);
+                        }
+
+                    }
+                });
+            }
+            window.RejectEnrollment = function (enrollmentid) {
+                $.ajax({
+                    type: 'post',
+                    url: 'RejectCourse?time=' + new Date().getTime(),
+                    data: { enrollment_id: enrollmentid },
+                    success: (data) => {
+                        var resJson = JSON.parse(data);
+                        if (resJson.state != 1) {
+                            layer.alert(resJson.msg, { title: "alert" });
+                        }
+                        else {
+                            tableIns.reload('apply', { where: { time: new Date(), course_name: $("#course_nameTb").val() } });
+                            layer.msg(resJson.msg);
+                        }
+
+                    }
+                });
+            }
+            window.RefundEnrollment = function (enrollmentid) {
+                $.ajax({
+                    type: 'post',
+                    url: 'AdminRefundCourse?time=' + new Date().getTime(),
+                    data: { enrollment_id: enrollmentid },
+                    success: (data) => {
+                        var resJson = JSON.parse(data);
+                        if (resJson.state != 1) {
+                            layer.alert(resJson.msg, { title: "alert" });
+                        }
+                        else {
+                            tableIns.reload('apply', { where: { time: new Date(), course_name: $("#course_nameTb").val() } });
+                            layer.msg(resJson.msg);
+                        }
+
+                    }
+                });
+            }
+            window.DeleteEnrollment = function (enrollmentid) {
+                layer.confirm("Are you sure to delete this data?", {
+                    btn: ['Sure', 'Cancel']
+                }, function () {
+                    $.ajax({
+                        type: 'post',
+                        url: 'DeleteEnrollment?time=' + new Date().getTime(),
+                        data: { enrollment_id: enrollmentid },
+                        success: (data) => {
+                            var resJson = JSON.parse(data);
+                            if (resJson.state != 1) {
+                                layer.alert(resJson.msg, { title: "alert" });
+                            }
+                            else {
+                                tableIns.reload('apply', { where: { time: new Date(), course_name: $("#course_nameTb").val() } });
+                                layer.msg(resJson.msg);
+                            }
+
+                        }
+                    });
+
+                });
+            };
+        });
+
+    </script>
+</body>
+
+</html>

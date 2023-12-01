@@ -1,0 +1,202 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "MyInfo";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>MyInfo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+</head>
+<body>
+    @using schoolEnrollment.Models:
+    @model Users
+    <form class="layui-form" action="" lay-filter="demo-val-filter">
+    <div style="margin-top:10px;"></div>
+
+    <div style="margin:50px 80px 10px 80px;">
+        <div style="margin-top:10px;"></div>
+        <div class="layui-row layui-col-space5">
+            <div class="layui-col-md9">
+                <div class="layui-row">
+                    <div class="layui-card">
+                        <div class="layui-card-header" style="background-color: #fafafa;">User Name</div>
+                        <div class="layui-card-body">
+                            @(Model.Name)
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:20px;"></div>
+                <div class="layui-row  layui-col-space5">
+                    <div class="layui-col-md3">
+                        <div class="layui-card">
+                            <div class="layui-card-header" style="background-color: #fafafa;">Account</div>
+                            <div class="layui-card-body">
+                                @(Model.User_Account)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-card">
+                            <div class="layui-card-header" style="background-color: #fafafa;">Phone</div>
+                            <div class="layui-card-body">
+                                @(Model.Phone)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-card">
+                            <div class="layui-card-header" style="background-color: #fafafa;">Email</div>
+                            <div class="layui-card-body">
+                                @(Model.Email)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        
+                    </div>
+                </div>
+                
+            </div>
+            <div class="layui-col-md3">
+                <div class="layui-panel">
+                    <div style="padding: 16px;">@Html.Raw(@ViewBag.ctrimg)</div>
+
+                    <div style="margin-left:10px;" class="layui-upload">
+                        <button style="margin-bottom:10px;" type="button" class="layui-btn" id="ID-upload-picture-btn">
+                            <i class="layui-icon layui-icon-upload"></i> Select Picture
+                        </button>
+                        <a style="margin-bottom:10px;" class="layui-btn" href="javascript:void(0)" onclick="UploadImage()">Upload Image</a>
+                            <a style="margin-bottom:10px;" class="layui-btn" href="javascript:void(0)" onclick="DeleteImage()">Delete Image</a>
+                        <blockquote style="width:300px;" class="layui-elem-quote layui-quote-nm">
+                            Picture Preview：
+                            <div class="layui-upload-list" id="upload-preview-picture">
+                                
+                            </div>
+                        </blockquote>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
+        @{
+            if (@ViewBag.msg != null)
+            {
+                <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+                <script src="/lib/layer/layer.js" charset="utf-8"></script>
+                <script type="text/javascript">
+                    var str = '@(ViewBag.msg)';
+                    layer.msg(str);
+                </script>
+            }
+        }
+    </div>
+    </form>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script>
+        var loadIndex = -1;
+        var file_picture_number = 0;
+
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer
+                , upload = layui.upload;
+
+                // 多图片上传
+            var instPictrue = upload.render({
+                elem: '#ID-upload-picture-btn',
+                url: 'OnUploadFilePicture', // 实际使用时改成您自己的上传接口即可。
+                auto: false,
+                multiple: false,
+                data: {
+                    user_id: function () {
+                        return 1;
+                    }
+                },
+                choose: function (obj) {
+                    // 将每次选择的文件追加到文件队列
+                    //var files = obj.pushFile();
+                    file_picture_number = 1;
+                    $('#upload-preview-picture').empty();
+                    // 预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#upload-preview-picture').append('<img src="' + result + '" alt="' + file.name + '" style="height: 90px;">')
+                    });
+                },
+                
+                done: function (res) {
+                    file_picture_number = 0;
+                    if (file_video_number==0) {
+                        layer.close(loadIndex);
+                        layer.msg("Upload Success!");
+                    }
+                }
+            });
+
+            window.getQueryVariable = function (variable) {
+                variable = variable.toLowerCase();
+                var query = window.location.search.toLowerCase().substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) { return pair[1]; }
+                }
+                return ("");
+            }
+
+            window.UploadImage = function(){
+                loadIndex = layer.msg('Uploading', {
+                   title: "alert" ,
+                    icon: 16,
+                    shade: 0.01
+                });;
+
+                if (file_picture_number > 0) {
+                    instPictrue.upload();
+                }
+            }
+            window.DeleteImage = function () {
+                loadIndex = layer.msg('Deleting', {
+                    icon: 16,
+                    shade: 0.01
+                });
+
+                $.ajax({
+                    type: 'post',
+                    url: 'DeleteImage?time=' + new Date().getTime(),
+                    //data: { formdata: JSON.stringify(_formdata) },
+                    success: (data) => {
+                        layer.close(loadIndex);
+                        
+                        var resJson = JSON.parse(data);
+                        if (resJson.state != 1) {
+                            layer.alert(resJson.msg, { title: "alert" });
+                        }
+                        else {
+                            $("#userimg").attr("src","");
+                            layer.msg(resJson.msg);
+                        }
+
+                    }
+                });
+            }
+
+            window.onload = function () {
+
+            }
+        });
+
+    </script>
+</body>
+
+</html>
+

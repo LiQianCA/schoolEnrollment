@@ -1,0 +1,276 @@
+﻿
+@{
+    Layout = null;
+    ViewData["Title"] = "AddCourse";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="layui-container">
+        <div style="margin-top:10px;"></div>
+        @using schoolEnrollment.Models:
+        @model Course
+        <form class="layui-form" action="" lay-filter="demo-val-filter">
+            <div id="formdata">
+            <div class="layui-form-item">
+                <label style="width:150px;" class="layui-form-label">Course Name</label>
+                <div class="layui-inline">
+                        <input type="text" name="Course_Name" id="Course_Name" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" value="@(Model.Course_Name)">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label style="width:150px;" class="layui-form-label">Start Time:</label>
+                    <div class="layui-inline">
+                            <input type="text" class="layui-input" id="Start_Time" name="Start_Time" placeholder="" value="@(Model.Start_Time)">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label style="width:150px;" class="layui-form-label">End Time:</label>
+                    <div class="layui-inline">
+                            <input type="text" class="layui-input" id="End_Time" name="End_Time" placeholder="" value="@(Model.End_Time)">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label style="width:150px;" class="layui-form-label">Course Hour:</label>
+                    <div class="layui-inline">
+                            <input type="number" lay-affix="number" placeholder="" min="0" step="1" class="layui-input" id="Course_Hours" name="Course_Hours" value="@(Model.Course_Hours)">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label style="width:150px;" class="layui-form-label">Course Price:</label>
+                    <div class="layui-inline">
+                            <input type="number" lay-affix="number" placeholder="" min="0" step="0.01" lay-precision="2" class="layui-input" name="Course_Price" id="Course_Price" value="@(Model.Course_Price)">
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="layui-form-item">
+                <label style="width:150px;" class="layui-form-label">Course Description</label>
+                <div style="width:850px;" class="layui-inline">
+                        <textarea type="text" name="Course_Description" id="Course_Description" lay-verify="required" placeholder="" autocomplete="off" class="layui-textarea">@(Model.Course_Description)</textarea>
+                </div>
+            </div>
+            </div>
+            <div style="margin-left:80px;" class="layui-upload">
+                <button style="margin-bottom:10px;" type="button" class="layui-btn" id="ID-upload-picture-btn">
+                    <i class="layui-icon layui-icon-upload"></i> Select Picture
+                </button>
+
+                <blockquote style="width:850px;" class="layui-elem-quote layui-quote-nm">
+                    Picture Preview：
+                    <div class="layui-upload-list" id="upload-preview-picture">
+                        @Html.Raw(@ViewBag.ctrimg)
+                    </div>
+                </blockquote>
+            </div>
+
+            <div style="margin-left:80px;" class="layui-upload">
+                <button style="margin-bottom:10px;" type="button" class="layui-btn" id="ID-upload-video-btn">
+                    <i class="layui-icon layui-icon-upload"></i> Select Video
+                </button>
+                <blockquote style="width:850px;" class="layui-elem-quote layui-quote-nm">
+                    Video Preview：
+                    <div class="layui-upload-list" id="upload-preview-video">
+                        @Html.Raw(@ViewBag.ctrvideo)
+                    </div>
+                </blockquote>
+            </div>
+
+            <div style="margin:50px 50px 50px 150px;"><a class="layui-btn" href="javascript:void(0)" onclick="SubmitData()">Add Course</a></div>
+        </form>
+        @{
+            if (@ViewBag.msg != null)
+            {
+                                <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+                                <script src="/lib/layer/layer.js" charset="utf-8"></script>
+                                <script type="text/javascript">
+                                    var str = '@(ViewBag.msg)';
+                                    layer.msg(str);
+                                </script>
+            }
+        }
+    </div>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script>
+        var loadIndex = -1;
+        var file_picture_number = 0;
+        var file_video_number = 0;
+        var course_id = "";
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer
+                , laydate = layui.laydate
+                , upload = layui.upload;
+            laydate.render({
+                elem: '#Start_Time',
+                type: 'datetime',
+                format: 'yyyy/MM/dd HH:mm:ss',
+                lang: 'en'
+            });
+            laydate.render({
+                elem: '#End_Time',
+                type: 'datetime',
+                format: 'yyyy/MM/dd HH:mm:ss',
+                lang: 'en'
+            });
+            //自定义验证规则
+            form.verify({
+                noempty: function (value) {
+                    if (value.length <= 0) {
+                        return 'can not be empty!';
+                    }
+                }
+            });
+
+            window.getQueryVariable = function (variable) {
+                variable = variable.toLowerCase();
+                var query = window.location.search.toLowerCase().substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) { return pair[1]; }
+                }
+                return ("");
+            }
+            // 多图片上传
+            var instPictrue = upload.render({
+                elem: '#ID-upload-picture-btn',
+                url: 'OnUploadFilePicture', // 实际使用时改成您自己的上传接口即可。
+                auto: false,
+                multiple: false,
+                data: {
+                    course_id: function () {
+                        return course_id;
+                    }
+                },
+                choose: function (obj) {
+                    // 将每次选择的文件追加到文件队列
+                    //var files = obj.pushFile();
+                    file_picture_number = 1;
+                    $('#upload-preview-picture').empty();
+                    // 预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#upload-preview-picture').append('<img src="' + result + '" alt="' + file.name + '" style="height: 90px;">')
+                    });
+                },
+                
+                done: function (res) {
+                    file_picture_number = 0;
+                    if (file_video_number==0) {
+                        layer.close(loadIndex);
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index);
+
+                        parent.layui.table.reload('apply', { where: { time: new Date() } });
+                    }
+                }
+            });
+            // 多图片上传
+            var instVideo = upload.render({
+                elem: '#ID-upload-video-btn',
+                url: 'OnUploadFileVideo', // 实际使用时改成您自己的上传接口即可。
+                auto: false,
+                multiple: false,
+                accept:"video",
+                data: {
+                    course_id: function () {
+                        return course_id;
+                    }
+                },
+                choose: function (obj) {
+                    // 将每次选择的文件追加到文件队列
+                    //var files = obj.pushFile();
+                    file_video_number = 1;
+                    $('#upload-preview-video').empty();
+                    // 预读本地文件示例，不支持ie8
+                    obj.preview(function (index, file, result) {
+                        $('#upload-preview-video').append('<img src="/images/video.png" alt="' + file.name + '" style="height: 90px;">')
+                    });
+                },
+
+                done: function (res) {
+                    file_video_number = 0;
+                    layer.close(loadIndex);
+                    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                    parent.layer.close(index);
+
+                    parent.layui.table.reload('apply', { where: { time: new Date() } });
+                }
+            });
+
+            window.SubmitData = function () {
+                var _formdata = form.val('demo-val-filter');
+                var idtmp = getQueryVariable("id");
+                $.ajax({
+                    type: 'post',
+                    url: 'ModifyCourse?time=' + new Date().getTime(),
+                    data: { formdata: JSON.stringify(_formdata), course_id: idtmp },
+                    success: (data) => {
+                        var resJson = JSON.parse(data);
+                        if (resJson.state != 1) {
+                            layer.alert(resJson.msg);
+                        }
+                        else {
+                            course_id = resJson.Course_Id;
+                            layer.msg(resJson.msg);
+                            console.dir(file_video_number);
+                            if (file_picture_number > 0 || file_video_number > 0) {
+
+                                loadIndex = layer.msg('Uploading', {
+                                    title:"alert",
+                                    icon: 16,
+                                    shade: 0.01
+                                });;
+
+                                if (file_picture_number > 0) {
+                                    instPictrue.upload();
+                                }
+                                if (file_video_number > 0) {
+                                    instVideo.upload();
+                                }
+                                
+                            }
+                            else{
+                                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                                parent.layer.close(index);
+
+                                parent.layer.msg(resJson.msg);
+                                parent.layui.table.reload('apply', { where: { time: new Date() } });
+                            }
+                        }
+                    }
+                });
+            };
+        });
+
+    </script>
+</body>
+
+</html>

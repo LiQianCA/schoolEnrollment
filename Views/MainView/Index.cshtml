@@ -1,0 +1,267 @@
+﻿
+@{
+    Layout = null;
+    ViewData["Title"] = "Index";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/lib/layui/css/layui.css" media="all">
+    <style>
+        .home-brick-box .brick-list, .home-brick-box .brick-promo-list {
+    margin: 0 0 -14px -14px;
+}
+/* .brick-list {
+    width: 1600px;
+} */
+.brick-list, .brick-promo-list {
+    height: 500px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+        .brick-item-m-2 {
+            height: 230px;
+            padding: 0;
+        }
+
+        .brick-item-m {
+            height: 220px;
+            padding: 15px 0 15px;
+        }
+
+        .brick-item {
+            position: relative;
+            z-index: 1;
+            float: left;
+            width: 320px;
+            margin-left: 14px;
+            margin-bottom: 14px;
+            background: #fff;
+            -webkit-transition: all .2s linear;
+            transition: all .2s linear;
+        }
+
+        .brick-item-m-2 .figure-img, .brick-item-m-2 .figure-img img {
+            width: 290px;
+            height: 150px;
+        }
+
+        .brick-item-m .figure-img {
+            width:270px;
+            height: 150px;
+            margin: 0 auto 18px;
+        }
+
+        .brick-item-m-2 .title {
+            margin: 0 10px 2px;
+        }
+
+        .brick-item-m .desc, .brick-item-m .title {
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .brick-item-m .title {
+            margin: 0 10px;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+        }
+
+        .brick-item-m .desc {
+            margin: 0 10px 10px;
+            height: 18px;
+            font-size: 12px;
+            color: #b0b0b0;
+        }
+
+        .brick-item-m .desc, .brick-item-m .title {
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .brick-item-m-2 .price {
+            margin: 0 10px 14px;
+        }
+
+        .brick-item-m .price {
+            margin: 0 10px 10px;
+            text-align: center;
+            color: #ff6700;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin:50px 80px 10px 80px;">
+        <div style="margin-top:10px;"></div>
+        <div class="layui-row">
+            <div class="layui-col-xs2">
+                <img style="height:50px" src="/lib/images/logo.png">
+            </div>
+            <div class="layui-col-xs7">
+                <div class="layui-form-item">
+                    <div class="layui-input-group">
+                        <div class="layui-input-prefix">
+                            Search
+                        </div>
+                        <input style="width:600px;" type="text" id="searchStr" placeholder="input course to search" class="layui-input">
+                        <div class="layui-input-split layui-input-suffix" style="cursor: pointer;">
+                            <i class="layui-icon layui-icon-search" onclick="OnSearch()"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs3">
+                
+                @Html.Raw(@ViewBag.ctrIfLogin)
+
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-xs6">
+                <div class="layui-carousel" id="courseBanner">
+                    <div carousel-item>
+                        @Html.Raw(@ViewBag.ctrTopCourses)
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs6">
+                @Html.Raw(@ViewBag.ctrTopCurrentCourseMsg)
+                
+            </div>
+        </div>
+        <div id="courseList">
+            
+        </div>
+        <div style="height:20px;"></div>
+        <div id="laypage-data-view"></div>
+        @{
+                if (@ViewBag.msg != null)
+                {
+                                                <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+                                                <script src="/lib/layer/layer.js" charset="utf-8"></script>
+                                                <script type="text/javascript">
+                                                    var str = '@(ViewBag.msg)';
+                                                    layer.msg(str);
+                                                </script>
+                }
+            }
+        </div>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+    <script>
+        var pageLimit = 10;
+        var pageIndex = 1;
+        layui.use(function () {
+            var form = layui.form,
+                layer = layui.layer,
+                carousel = layui.carousel,
+            laypage = layui.laypage;
+
+            carousel.render({
+                elem: '#courseBanner',
+                height: "250px",
+                change: function (obj) {
+                    $("#currentCourseMsg").html("");
+                    $("#currentCourseMsg").html(obj.item[0].firstChild.firstChild.getAttribute('datamsg'));
+                }
+            });
+
+            window.OnSearch = function () {
+                LoadCourses();
+            }
+
+            window.LoadCourses = function () {
+                $.ajax({
+                    type: 'post',
+                    url: '/MainView/GetAllCourseCount?time=' + new Date().getTime(),
+                    data: { searchstr: $("#searchStr").val() },
+                    success: (dataCount) => {
+
+                        // 普通用法
+                        laypage.render({
+                            elem: 'laypage-data-view',
+                            count: dataCount, // 数据总数
+                            limit: pageLimit,
+                            jump: (obj,first) => {
+
+                                pageIndex = obj.curr;
+
+                                $.ajax({
+                                    type: 'post',
+                                    url: '/MainView/GetCurrentPageCourses?time=' + new Date().getTime(),
+                                    data: { pagelimit: obj.limit, pageindex: obj.curr,searchstr:$("#searchStr").val() },
+                                    success: (data) => {
+                                        $("#courseList").empty();
+                                        var resJson = JSON.parse(data);
+                                        if (resJson.state != 1) {
+                                            //layer.alert(resJson.msg, { title: "alert" });
+                                        }
+                                        else {
+                                            
+                                            $("#courseList").append(resJson.data);
+                                        }
+
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                });
+            }
+
+            LoadCourses();
+
+            window.JumpToCourseDetail = function (courseid) {
+                layer.open({
+                    skin: 'layui-layer-lan',
+                    type: 2,
+                    title: 'Course Detail',
+                    shadeClose: false,
+                    shade: [0.8, '#000'],
+                    moveOut: true,
+                    //maxmin: true, //开启最大化最小化按钮
+                    area: ['90%', '90%'],
+                    content: "/Course/CourseDetail?id=" + courseid,
+                });
+                //window.location.replace("/Course/CourseDetail?courseid=" + courseid);
+            }
+
+            window.MyInfo = function () {
+                layer.open({
+                    skin: 'layui-layer-lan',
+                    type: 2,
+                    title: 'MyInfo',
+                    shadeClose: false,
+                    shade: [0.8, '#000'],
+                    moveOut: true,
+                    //maxmin: true, //开启最大化最小化按钮
+                    area: ['90%', '90%'],
+                    content: "/Account/MyInfo",
+                });
+            }
+
+            window.ToSelectList = function () {
+                window.location.href ="/SelectView/Index";
+            }
+        });
+
+    </script>
+</body>
+
+</html>
