@@ -16,9 +16,9 @@ namespace schoolEnrollment.Utitlty
             try
             {
                 string MailServer = "smtp.office365.com";
-                //用户名
+                //username
                 string MailUserName = "autosend2023@outlook.com";
-                // 密码
+                // password
                 string MailPassword = "Test2023";
                 // 名称
                 string MailName = "Course AutoSend";
