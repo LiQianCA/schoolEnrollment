@@ -10,12 +10,12 @@ builder.Services.AddSession();
 builder.Services.Configure<FormOptions>(option =>
 {
     option.ValueLengthLimit = int.MaxValue;
-    //设置最大1G, 这里的单位是byte
+    
     option.MultipartBodyLengthLimit = 1073741824;
 });
 builder.WebHost.ConfigureKestrel((context, options) =>
 {
-    //设置最大1G, 这里的单位是byte
+    
     options.Limits.MaxRequestBodySize = 1073741824;
 });
 
