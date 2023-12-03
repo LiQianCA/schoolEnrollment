@@ -79,7 +79,7 @@ namespace schoolEnrollment.Controllers
 
             return selectstr;
         }
-        // 提交登录
+        
         [HttpPost]
         public ActionResult Login(Users user)
         {
@@ -128,7 +128,7 @@ namespace schoolEnrollment.Controllers
                 });
             }
         }
-        // 提交登录
+       
         [HttpPost]
         public string ToLogin(string formdata)
         {
@@ -168,7 +168,7 @@ namespace schoolEnrollment.Controllers
             return resData.ToString();
         }
 
-        // 提交登录
+        
         [HttpPost]
         public string DoRegister(string formdata)
         {
