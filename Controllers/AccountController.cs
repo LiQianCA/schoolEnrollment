@@ -30,18 +30,7 @@ namespace schoolEnrollment.Controllers
             {
                 users = result.ToList()[0];
 
-                var userimgList = azureStorage.ListAsync().Result;
-
-                var imgstr = "";
-                for (int i = 0; i < userimgList.Count; i++)
-                {
-                    if (userimgList[i].Name.Equals(users.Name+"_"+users.User_Id))
-                    {
-                        BlobDto file = azureStorage.DownloadAsync(userimgList[i].Name).Result;
-                        //imgstr = "<img src=\"data:image/png;base64," + Convert.ToBase64String(userimgList[i].Uri) + "\" style=\"height: 190px;\">";
-
-                        byte[] bytes = new byte[file.Content.Length];
-                        file.Content.Read(bytes, 0, bytes.Length);
+               
 
                         imgstr = "<img id=\"userimg\" src=\"data:image/png;base64," + Convert.ToBase64String(bytes) + "\" style=\"height: 190px;\">";
                         break;
