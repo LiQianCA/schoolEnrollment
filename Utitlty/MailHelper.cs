@@ -20,35 +20,33 @@ namespace schoolEnrollment.Utitlty
                 string MailUserName = "autosend2023@outlook.com";
                 // password
                 string MailPassword = "Test2023";
-                // 名称
+                // mail name
                 string MailName = "Course AutoSend";
 
                 SmtpClient smtpclient = new SmtpClient(MailServer, 587);
-                //构建发件人的身份凭据类
+                //credentials of sender
                 smtpclient.Credentials = new NetworkCredential(MailUserName, MailPassword);
                 smtpclient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //SSL连接
+                //SSL connection
                 smtpclient.EnableSsl = true;
-                //构建消息类
-                MailMessage objMailMessage = new MailMessage();
-                //设置优先级
-                objMailMessage.Priority = MailPriority.High;
 
-                //消息发送人
+
+                //message object
+                MailMessage objMailMessage = new MailMessage();
+                //set priority
+                objMailMessage.Priority = MailPriority.High;
+                //sender
                 objMailMessage.From = new MailAddress(MailUserName, MailName, Encoding.UTF8);
-                //标题
+                //email title
                 objMailMessage.Subject = Subject.Trim();
                 objMailMessage.To.Add(SendTo);
                 if (CopyTo!="")
                 {
                     objMailMessage.CC.Add(CopyTo);
                 }
-                
-                //标题字符编码
+                //encoding of email
                 objMailMessage.SubjectEncoding = Encoding.UTF8;
-                //正文
-                //body = body.Replace("\r\n", "<br>");
-                //body = body.Replace(@"\r\n", "<br>");
+                //body
                 objMailMessage.Body = Context.Trim();
                 objMailMessage.IsBodyHtml = true;
                 //内容字符编码
@@ -68,7 +66,7 @@ namespace schoolEnrollment.Utitlty
 
                 ServicePointManager.ServerCertificateValidationCallback = delegate (Object obj, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors) { return true; };
 
-                //发送
+                //send the email
                 smtpclient.Send(objMailMessage);
 
                 resBool = true;

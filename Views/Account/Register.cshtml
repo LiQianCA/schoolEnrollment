@@ -134,7 +134,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label style="display: inline-block;color: black;">Password:</label>
-                    <input style="display: inline-block; width: 75%; float:right;" type="password" name="user_password" placeholder="please input password" lay-verify="required|pass" autocomplete="off" class="layui-input" value="@(Model.User_Password)">
+                    <input style="display: inline-block; width: 75%; float:right;" type="password" name="user_password" id="user_password" placeholder="please input password" lay-verify="required|pass" autocomplete="off" class="layui-input" value="@(Model.User_Password)">
 
                 </div>
                 <div class="layui-form-item">
@@ -199,7 +199,7 @@
                 },
                 
                 samepass: function (value) {
-                    if (document.getElementById('newpassword').value != document.getElementById('password').value) {
+                    if (document.getElementById('newpassword').value != document.getElementById('user_password').value) {
                         return 'Entered passwords differ!';
                     }
                 }
@@ -230,7 +230,7 @@
                     layer.msg("The password must be 6 to 20 digits and must include letters and numbers!");
                     return false;
                 }
-                if (document.getElementById('newpassword').value != document.getElementById('password').value) {
+                if (document.getElementById('newpassword').value != document.getElementById('user_password').value) {
                     return 'Entered passwords differ!';
                 }
 

@@ -32,13 +32,13 @@ namespace schoolEnrollment.Controllers
 
                     var userimgList = azureStorage.ListAsync().Result;
 
-                    
+
                     for (int i = 0; i < userimgList.Count; i++)
                     {
                         if (userimgList[i].Name.Equals(users.Name + "_" + users.User_Id))
                         {
                             BlobDto file = azureStorage.DownloadAsync(userimgList[i].Name).Result;
-                            
+
                             byte[] bytes = new byte[file.Content.Length];
                             file.Content.Read(bytes, 0, bytes.Length);
 
@@ -46,12 +46,12 @@ namespace schoolEnrollment.Controllers
                             break;
                         }
                     }
-                    
+
                 }
 
                 //ViewBag.ctrIfLogin = "<button type=\"button\" class=\"layui-btn layui-btn-radius\">My Info</button><button type=\"button\" class=\"layui-btn layui-btn-normal layui-btn-radius\">My Course</button>";
 
-                ViewBag.ctrIfLogin = $"<ul style=\"margin-top:-10px;\" class=\"layui-nav layui-bg-gray\"><li class=\"layui-nav-item\" lay-unselect><a href=\"javascript:;\"><img src=\"{imgstr}\" class=\"layui-nav-img\"></a><dl class=\"layui-nav-child\"><dd><a  href=\"javascript:void(0)\" onclick=\"ToSelectList()\">My SelectList</a></dd><dd><a href=\"javascript:;\" onclick=\"MyInfo()\">MyInfo</a></dd><hr><dd style=\"text-align: center;\"><a href=\"/MainView/Logout\">Logout</a></dd></dl></li></ul>";
+                ViewBag.ctrIfLogin = $"<ul style=\"margin-top:-10px;\" class=\"layui-nav layui-bg-gray\"><li class=\"layui-nav-item\" lay-unselect><a href=\"javascript:;\"><img src=\"{imgstr}\" class=\"layui-nav-img\">{users.Name}</a><dl class=\"layui-nav-child\"><dd><a  href=\"javascript:void(0)\" onclick=\"ToSelectList()\">My SelectList</a></dd><dd><a href=\"javascript:;\" onclick=\"MyInfo()\">MyInfo</a></dd><hr><dd style=\"text-align: center;\"><a href=\"/MainView/Logout\">Logout</a></dd></dl></li></ul>";
             }
             else
             {
@@ -174,6 +174,11 @@ namespace schoolEnrollment.Controllers
             return View();
 
         }
+        public IActionResult Chart()
+        {
+            return View();
+
+        }
         public IActionResult CoursePay()
         {
             string id = HttpContext.Request.Query["id"].ToString();
@@ -191,7 +196,51 @@ namespace schoolEnrollment.Controllers
                 return View("CoursePay", null);
             }
         }
+        public string GetChartData()
+        {
+            string GetStrJson = "";
+            try
+            {
+                var result = from el in dataContext.Enrollment
+                             join cl in dataContext.Course on el.Course_Id equals cl.Course_Id into enrollmentCourses
+                             from ec in enrollmentCourses.DefaultIfEmpty()
+                             where el.Enrollment_Status.ToLower() == "enrolled"
+                             group el by new 
+                             {
+                                 Course_Name = ec.Course_Name
+                             } into g select new 
+                             {
+                                 Course_Name = g.Key.Course_Name,
+                                 Count = g.Count()
+                             };
+                if (result != null && result.Count() > 0)
+                {
+                    var qua = result.ToList();
+                    JObject data = new JObject();
+                    JArray jxdata = new JArray();
+                    JArray jydata = new JArray();
 
+                    for (int i = 0; i < qua.Count; i++)
+                    {
+                        jxdata.Add(qua[i].Course_Name);
+                        jydata.Add(qua[i].Count);
+                    }
+                    data.Add("xAxis", jxdata);
+                    data.Add("yAxis", jydata);
+                    GetStrJson = data.ToString();
+                }
+                else
+                {
+                    GetStrJson = "{}";
+                }
+            }
+            catch (Exception ex)
+            {
+                GetStrJson = "{}";
+            }
+
+            return GetStrJson;
+        }
 
         public string GetCurrentPageCourses(int pagelimit, int pageindex,string searchstr)
         {
@@ -647,6 +696,8 @@ namespace schoolEnrollment.Controllers
 
         public string ToPayCourse(string course_id)
         {
+            var userid = HttpContext.Session.GetInt32("User_Id");
+
             JObject resData = new JObject();
             resData.Add("state", -1);
             resData.Add("msg", "");
@@ -658,7 +709,7 @@ namespace schoolEnrollment.Controllers
                              from ec in enrollmentCourses.DefaultIfEmpty()
                              join ul in dataContext.Users on el.User_Id equals ul.User_Id into enrollmentUsers
                              from eu in enrollmentUsers.DefaultIfEmpty()
-                             where el.Course_Id == Convert.ToInt32(course_id)
+                             where el.Course_Id == Convert.ToInt32(course_id) && el.User_Id== userid
                              select new
                              {
                                  el.Enrollment_Id,
@@ -677,7 +728,7 @@ namespace schoolEnrollment.Controllers
                 {
                     var qua = result.ToList();
 
-                    if (!string.IsNullOrEmpty(qua[0].Enrollment_Status) && qua[0].Enrollment_Status.Equals("Approved"))
+                    if (!string.IsNullOrEmpty(qua[0].Enrollment_Status) && qua[0].Enrollment_Status.ToLower().Equals("approved"))
                     {
                         // 密钥
                         StripeConfiguration.ApiKey = "sk_test_51OHTYEGQSLeOCjaBp7Ir3YtM33tzdh3IpN07jaZP7ncnwTfaFDaVi5BeFJMEK97usiA3wsim2rjyqiHoTgGMLQIz003F5gJnZ3";
@@ -685,26 +736,22 @@ namespace schoolEnrollment.Controllers
                         var options = new SessionCreateOptions
                         {
                             LineItems = new List<SessionLineItemOptions>
-                {
-                  new SessionLineItemOptions
-                  {
-                    Quantity = 1,
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                            UnitAmount = (long)(qua[0].Course_Price*100),
-
-                          Currency = "usd",
-
-                          ProductData = new SessionLineItemPriceDataProductDataOptions
-
                             {
-                              //Images= new List<string>(){$"data:image/png;base64,{Convert.ToBase64String(qua[0].Course_Img)}" },
-                                Name = qua[0].Course_Name,
-                                Description=qua[0].Course_Description
-                          },
-                    }
-                  },
-                },
+                              new SessionLineItemOptions
+                              {
+                                Quantity = 1,
+                                PriceData = new SessionLineItemPriceDataOptions
+                                {
+                                      UnitAmount = (long)(qua[0].Course_Price*100),
+                                      Currency = "CAD",
+                                      ProductData = new SessionLineItemPriceDataProductDataOptions
+                                      {
+                                            Name = qua[0].Course_Name,
+                                            Description=qua[0].Course_Description
+                                      },
+                                }
+                              },
+                            },
 
                             Mode = "payment",
                             SuccessUrl = "http://" + Request.Host.ToString() + "/MainView/PaySuccess?id=" + qua[0].Course_Id + "&enrollmentid=" + qua[0].Enrollment_Id,
@@ -719,7 +766,7 @@ namespace schoolEnrollment.Controllers
                     }
                     else
                     {
-                        resData["msg"] = "This Course can not be Pay!";
+                        resData["msg"] = "Payment can only be made when the \"Enrollment Status\" is \"Approved\"!";
                     }
 
                 }
@@ -755,7 +802,7 @@ namespace schoolEnrollment.Controllers
             {
                 var qua = result.ToList();
 
-                if (!string.IsNullOrEmpty(qua[0].Enrollment_Status) && qua[0].Enrollment_Status.Equals("Enrolled") && qua[0].Payment_Status.Equals("Paid"))
+                if (!string.IsNullOrEmpty(qua[0].Enrollment_Status) && qua[0].Enrollment_Status.ToLower().Equals("enrolled") && qua[0].Payment_Status.ToLower().Equals("paid"))
                 {
                     Enrollment enrollment = new Enrollment();
                     enrollment.Enrollment_Id = qua[0].Enrollment_Id;

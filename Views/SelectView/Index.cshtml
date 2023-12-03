@@ -46,7 +46,7 @@
         </div>
         <table class="layui-hide" id="apply" lay-filter="apply" lay-data="{height: '400', cellMinWidth: 80, page: true, limit:30}"></table>
         <script type="text/html" id="toolbarDemo">
-            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Reflash</button>
+            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Refresh</button>
 
         </script>
         <script type="text/html" id="barDemo">
@@ -78,16 +78,16 @@
                 , cols: [[
                     { type: 'radio', title: '😊' }
                     
-                    , { field: 'Select_Id', width: '10%', title: 'id', hide: true, align: 'center' }
-                    , { field: 'Course_Id', width: '10%', title: 'Course Id', hide: true, align: 'center' }
-                    , { field: 'Course_Name', width: '10%', title: 'Course Name', align: 'center' }
-                    , { field: 'Start_Time', width: '15%', title: 'Start Time', align: 'center' }
-                    , { field: 'End_Time', width: '15%', title: 'End Time', align: 'center' }
-                    , { field: 'Course_Hours', width: '10%', title: 'Hours', align: 'center' }
-                    , { field: 'Course_Price', width: '10%', title: 'Price', align: 'center' }
-                    , { field: 'Select_Time', width: '10%', title: 'Select Time', align: 'center' }
-                    , { field: 'Enrollment_Status', width: '10%', title: 'Enrollment Status', align: 'center' }
-                    , { field: 'Payment_Status', width: '10%', title: 'Payment Status', align: 'center' }
+                    , { field: 'Select_Id', width: '5%', title: 'id', hide: true, align: 'center' }
+                    , { field: 'Course_Id', width: '5%', title: 'Course Id', hide: true, align: 'center' }
+                    , { field: 'Course_Name', width: '13%', title: 'Course Name', align: 'center',sort:'true' }
+                    , { field: 'Start_Time', width: '12%', title: 'Start Time', align: 'center' }
+                    , { field: 'End_Time', width: '12%', title: 'End Time', align: 'center' }
+                    , { field: 'Course_Hours', width: '5%', title: 'Hours', align: 'center' }
+                    , { field: 'Course_Price', width: '5%', title: 'Price', align: 'center' }
+                    , { field: 'Select_Time', width: '13%', title: 'Select Time', align: 'center' }
+                    , { field: 'Enrollment_Status', width: '8%', title: 'Enrollment Status', align: 'center' }
+                    , { field: 'Payment_Status', width: '8%', title: 'Payment Status', align: 'center' }
                     , { fixed: 'right', title: 'Operate', minWidth: 125, toolbar: '#barDemo' }
                 ]]
                 , data: []

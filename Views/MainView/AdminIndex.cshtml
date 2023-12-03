@@ -40,7 +40,7 @@
                         <div class="layui-input-prefix">
                             Search
                         </div>
-                        <input style="width:500px;" type="text" placeholder="input course to search" class="layui-input" id="course_nameTb">
+                        <input style="width:400px;" type="text" placeholder="input course to search" class="layui-input" id="course_nameTb">
                         <div class="layui-input-split layui-input-suffix" style="cursor: pointer;">
                             <i class="layui-icon layui-icon-search" onclick="OnSearch()"></i>
                         </div>
@@ -51,13 +51,13 @@
 
                 <a class="layui-btn layui-bg-blue layui-btn-radius" href="/Course/CourseManament">Course Management</a>
                 <a class="layui-btn layui-bg-blue layui-btn-radius" href="/MainView/StudentList">Student List</a>
-                <a class="layui-btn layui-btn-radius">Chart</a>
+                <a class="layui-btn layui-btn-radius" href="javascript:void(0)" onclick="ShowChart()">Chart</a>
                 <a class="layui-btn layui-btn-primary layui-btn-radius layui-bg-red" href="/MainView/Logout">Logout</a>
             </div>
         </div>
         <table class="layui-hide" id="apply" lay-filter="apply" lay-data="{height: '400', cellMinWidth: 80, page: true, limit:30}"></table>
         <script type="text/html" id="toolbarDemo">
-            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Reflash</button>
+            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Refresh</button>
 
         </script>
         <script type="text/html" id="barDemo_1">
@@ -97,19 +97,20 @@
                 , toolbar: '#toolbarDemo'
                 , height: 'full-40'
                 , size: 'sm'
+                 ,lang: 'en'
                 , url: 'GetEnrollmentTableData?time=' + new Date().getTime()
                 , where: { course_name: $("#course_nameTb").val() }
                 , cols: [[
                     { type: 'radio', title: '😊' }
-                    , { field: 'Enrollment_Id', width: '10%', title: 'Enrollment Id', hide: true, align: 'center' }
-                    , { field: 'Name', width: '8%', title: 'User Name', align: 'center' }
-                    , { field: 'Course_Name', width: '8%', title: 'Course Name', align: 'center' }
+                    , { field: 'Enrollment_Id', width: '5%', title: 'Enrollment Id', hide: true, align: 'center' }
+                    , { field: 'Name', width: '8%', title: 'User Name', align: 'center',sort:true }
+                    , { field: 'Course_Name', width: '12%', title: 'Course Name', align: 'center' }
                     , { field: 'Enrollment_Time', width: '15%', title: 'Enrollment Time', align: 'center' }
                     , { field: 'Enrollment_Status', width: '10%', title: 'Enrollment Status', align: 'center' }
                     , { title: 'Approve/Reject/Refund', width: '16%', toolbar: '#barDemo_1' }
                     , { field: 'Payment_Amount', width: '10%', hide: true, title: 'Payment Amount', align: 'center' }
-                    , { field: 'Payment_Time', width: '10%', title: 'Payment Time', align: 'center' }
-                    , { field: 'Payment_Status', width: '15%', title: 'Payment Status', align: 'center' }
+                    , { field: 'Payment_Time', width: '13%', title: 'Payment Time', align: 'center' }
+                    , { field: 'Payment_Status', width: '10%', title: 'Payment Status', align: 'center' }
                     , { fixed: 'right', title: 'Operate', minWidth: 125, toolbar: '#barDemo_2' }
                 ]]
                 , data: []
@@ -247,6 +248,20 @@
 
                 });
             };
+
+            window.ShowChart = function(){
+                layer.open({
+                    skin: 'layui-layer-lan',
+                    type: 2,
+                    title: 'Chart',
+                    shadeClose: false,
+                    shade: [0.8, '#000'],
+                    moveOut: true,
+                    //maxmin: true, //开启最大化最小化按钮
+                    area: ['90%', '90%'],
+                    content: "/MainView/Chart?",
+                });
+            }
         });
 
     </script>

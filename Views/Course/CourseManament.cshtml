@@ -21,6 +21,9 @@
 <body>
     <div class="layui-container">
         <div style="margin-top:10px;"></div>
+        <blockquote class="layui-elem-quote">
+            WelCome,Admin
+        </blockquote>
         <div class="layui-row">
             <div class="layui-col-xs2">
                 <img style="height:50px" src="/lib/images/logo.png">
@@ -39,8 +42,8 @@
                 </div>
             </div>
             <div class="layui-col-xs4">
-                <a class="layui-btn layui-btn-primary layui-btn-radius" href="javascript:void(0)" onclick="AddCourse()">Add Course</a>
-                <a class="layui-btn layui-btn-primary layui-btn-radius" href="/MainView/AdminIndex">Back to Admin Panel</a>
+                <a class="layui-btn layui-btn-primary layui-bg-blue layui-btn-radius" href="javascript:void(0)" onclick="AddCourse()">Add Course</a>
+                <a class="layui-btn layui-btn-primary layui-bg-blue layui-btn-radius" href="/MainView/AdminIndex">Back to Admin Panel</a>
                 <a class="layui-btn layui-btn-primary layui-btn-radius layui-bg-red" href="Logout">Logout</a>
             </div>
         </div>
@@ -61,7 +64,7 @@
         </script>
         <table class="layui-hide" id="apply" lay-filter="apply" lay-data="{height: '400', cellMinWidth: 80, page: true, limit:30}"></table>
         <script type="text/html" id="toolbarDemo">
-            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Reflash</button>
+            <button class="layui-btn layui-btn-sm" id="refreshbt" type="button" lay-event="reflash"><i class="layui-icon layui-icon-refresh"></i>Refresh</button>
             
         </script>
         <script type="text/html" id="barDemo">
@@ -92,13 +95,13 @@
                 , cols: [[
                     { type: 'radio', title: '😊' }
                     , { field: 'Course_Image', title: 'Course Image', width: '10%', align: 'center', templet: '#courseimg' }
-                    , { field: 'Id', width: '10%', title: 'id', hide: true, align: 'center' }
-                    , { field: 'Course_Name', width: '10%', title: 'Course Name', align: 'center' }
+                    , { field: 'Id', width: '5%', title: 'id', hide: true, align: 'center' }
+                    , { field: 'Course_Name', width: '15%', title: 'Course Name', align: 'center' }
                     , { field: 'Start_Time', width: '15%', title: 'Start Time', align: 'center' }
                     , { field: 'End_Time', width: '15%', title: 'End Time', align: 'center' }
-                    , { field: 'Course_Hours', width: '10%', title: 'Hours', align: 'center' }
-                    , { field: 'Course_Price', width: '10%', title: 'Price', align: 'center' }
-                    , { field: 'Course_Description', width: '25%', title: 'Description', align: 'center' }
+                    , { field: 'Course_Hours', width: '5%', title: 'Hours', align: 'center' }
+                    , { field: 'Course_Price', width: '5%', title: 'Price', align: 'center' }
+                    , { field: 'Course_Description', width: '25%', title: 'Description', align: 'left' }
                     ,{ fixed: 'right', title: 'Operate', minWidth: 125, toolbar: '#barDemo' }
                 ]]
                 , data: []

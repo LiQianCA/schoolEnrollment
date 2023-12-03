@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+    ViewData["Title"] = "Chart";
+}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="/js/echarts.js"></script>
+    <script src="/lib/jquery/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="/lib/layui/layui.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width: 70%;height:400px;"></div>
+    <script type="text/javascript">
+      
+        $(document).ready(function () {
+        $.ajax({
+            type: 'post',
+            url: 'GetChartData?time=' + new Date().getTime(),
+            //data: {  },
+            success: (data) => {
+                
+                var resJson = JSON.parse(data);
+                if (Object.keys(resJson).length > 0) {
+                        console.dir(resJson);
+                        getBarChart(resJson.xAxis, resJson.yAxis);
+                    
+                }
+            }
+        });
+        });
+
+        // 柱状图
+        function getBarChart(x, y) {
+            var bar = echarts.init(document.getElementById('main'));
+            bar.setOption({
+                title: {
+                    text: 'Chart Of Course Admissions',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line'
+                    }
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        name: 'Course',
+                        data: x,
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: 'Count',
+                        interval:1
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Count',
+                        type: 'bar',
+                        barWidth: '60%',
+                        data: y
+                    }
+                ]
+            })
+        }
+    </script>
+  </body>
+</html>
